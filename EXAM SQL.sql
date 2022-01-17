@@ -72,3 +72,13 @@ GO
 ALTER TABLE CustomerTransaction
 ADD CONSTRAINT CK_MONEY
 CHECK ( Amount > 0 AND Amount <= 1000000)
+GO
+
+--7  tạo view
+CREATE VIEW vCustomerTransactions
+AS
+SELECT Name, CustomerAccount.AccountNumber,TransactionDate,Amount ,CustomerTransaction.DepositorWithdraw FROM Customer
+JOIN CustomerAccount
+ON CustomerAccount.CustomerID = Customer.CustomerID
+JOIN CustomerTransaction
+ON CustomerTransaction.AccountNumber = CustomerAccount.AccountNumber
